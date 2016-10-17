@@ -1,7 +1,8 @@
 fn.el -- Functional utilities for Emacs Lisp.
 -----
 
-__fn.el__ provides essential an anonymous function facility focused on concision and readability
+__fn.el__ provides essential an anonymous function facility focused on
+concision and readability
 
 ------------------------------------------------------------
 
@@ -30,7 +31,9 @@ Return a function defined by BODY.
 The definition BODY may use anaphoric parameters to refer to the arguments. For
 a single-argument function, use `<>` or `it`. For a multiple-argument function,
 use `<1>` to refer to the first argument, `<2>` to refer to the second, and so
-on up to `<9>`.
+on up to `<9>`. The parameter `<rest>` refers to a list containing the (n+1)st
+and later arguments, where <n> is the highest numerical parameter supplied.
+
 
 If applied to a literal, creates a constant function, or equivalently, a thunk
 (since it can be called with any number of arguments).
@@ -59,8 +62,10 @@ bind as a function value, use `lambda' or `-lambda'.
 
 Return a function defined by BODY.
 
-The definition BODY may use the anaphoric parameters `<>`, `it` and `<1>` to refer to
-the first argument, `<2>` to refer to the second, and so on up to `<9>`.
+The definition BODY may use the anaphoric parameters `<>`, `it` and `<1>` to
+refer to the first argument, `<2>` to refer to the second, and so on up to
+`<9>`. The parameter `<rest>` refers to a list containing the (n+1)st and later
+arguments, where <n> is the highest numerical parameter supplied.
 
     (-map (fn: * <> <>) (number-sequence 0 10))
     ;; (0 1 4 9 16 25 36 49 64 81 100)

@@ -41,7 +41,8 @@ bind as a function value, use `lambda' or `-lambda'.
 The definition BODY may use anaphoric parameters to refer to the arguments. For
 a single-argument function, use <> or it. For a multiple-argument function, use
 <1> to refer to the first argument, <2> to refer to the second, and so on up to
-<9>.
+<9>. The parameter <rest> refers to a list containing the (n+1)st and later
+arguments, where <n> is the highest numerical parameter supplied.
 
 If applied to a literal, creates a constant function, or equivalently, a thunk (
 since it can be called with any number of arguments).
@@ -103,7 +104,10 @@ Intended for inline use where concision is desired.  If creating a function to
 bind as a function value, use `lambda' or `-lambda'.
 
 The definition BODY may use the anaphoric parameters <>, it or <1> to refer to
-the first argument, <2> to refer to the second, and so on up to <9>.
+the first argument, <2> to refer to the second, and so on up to <9>. The
+parameter <rest> refers to a list containing the (n+1)st and later arguments,
+where <n> is the highest numerical parameter supplied.
+
 
 Examples:
 
