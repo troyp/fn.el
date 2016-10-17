@@ -81,7 +81,11 @@ Examples:
          bindings)
     (when (member '<rest> symbols)
       (!cons (list '<rest>
-                   `(seq-drop ,argsym ,highest-digit-var-idx))
+                   (case highest-digit-var-idx
+                     (0 argsym)
+                     (1 `(cdr ,argsym))
+                     (2 `(cddr ,argsym))
+                     (t `(seq-drop ,argsym ,highest-digit-var-idx))))
              bindings))
     (--map (!cons (list  it
                          `(nth 0 ,argsym))
@@ -132,7 +136,11 @@ Examples:
          bindings)
     (when (member '<rest> symbols)
       (!cons (list '<rest>
-                   `(seq-drop ,argsym ,highest-digit-var-idx))
+                   (case highest-digit-var-idx
+                     (0 argsym)
+                     (1 `(cdr ,argsym))
+                     (2 `(cddr ,argsym))
+                     (t `(seq-drop ,argsym ,highest-digit-var-idx))))
              bindings))
     (--map (!cons (list  it
                          `(nth 0 ,argsym))
