@@ -79,6 +79,9 @@ Examples:
                                                       digit-vars)
                                          -1)))
          bindings)
+    (cl-assert (not (and symbol-vars-used digit-vars-used))
+               nil
+               "Numbered placeholders <n> should not be combined with <>.")
     (when (member '<rest> symbols)
       (!cons (list '<rest>
                    (case highest-digit-var-idx
@@ -134,6 +137,9 @@ Examples:
                                                       digit-vars)
                                          -1)))
          bindings)
+    (cl-assert (not (and symbol-vars-used digit-vars-used))
+               nil
+               "Numbered placeholders <n> should not be combined with <>.")
     (when (member '<rest> symbols)
       (!cons (list '<rest>
                    (case highest-digit-var-idx
