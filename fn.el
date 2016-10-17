@@ -39,13 +39,13 @@ Intended for inline use where concision is desired.  If creating a function to
 bind as a function value, use `lambda' or `-lambda'.
 
 The definition BODY may use anaphoric parameters to refer to the arguments. For
-a single-argument function, use <> or it. For a multiple-argument function, use
-<1> to refer to the first argument, <2> to refer to the second, and so on up to
-<9>. The parameter <rest> refers to a list containing the (n+1)st and later
-arguments, where <n> is the highest numerical parameter supplied.
+a single-argument function, <> can be used. For a multiple-argument function,
+use <1> to refer to the first argument, <2> to refer to the second, and so on
+up to <9>. The parameter <rest> refers to a list containing the (n+1)st and
+later arguments, where <n> is the highest numerical parameter supplied.
 
-If applied to a literal, creates a constant function, or equivalently, a thunk (
-since it can be called with any number of arguments).
+If applied to a literal, creates a constant function, or equivalently, a thunk
+(since it can be called with any number of arguments).
 
 Examples:
 
@@ -68,7 +68,7 @@ Examples:
   ;; 7"
   (declare (debug 'body))
   (let* ((argsym       (make-symbol "ARGS"))
-         (symbol-vars  '(<> it))
+         (symbol-vars  '(<>))
          (digit-vars   '(<1> <2> <3> <4> <5> <6> <7> <8> <9>))
          (symbols      (eval (backquote (-flatten ',body))))
          (digit-vars-used     (-intersection digit-vars symbols))
@@ -107,10 +107,10 @@ Examples:
 Intended for inline use where concision is desired.  If creating a function to
 bind as a function value, use `lambda' or `-lambda'.
 
-The definition BODY may use the anaphoric parameters <>, it or <1> to refer to
-the first argument, <2> to refer to the second, and so on up to <9>. The
-parameter <rest> refers to a list containing the (n+1)st and later arguments,
-where <n> is the highest numerical parameter supplied.
+The definition BODY may use the anaphoric parameter <> for the sole argument,
+order <1> ... <9> to refer to multiple positional arguments. The parameter
+<rest> refers to a list containing the (n+1)st and later arguments,where <n> is
+the highest numerical parameter supplied.
 
 
 Examples:
@@ -118,12 +118,12 @@ Examples:
   (-map (fn: * <> <>) (number-sequence 0 10))
   ;; (0 1 4 9 16 25 36 49 64 81 100)
 
-  (-filter (fn: > it 0)
+  (-filter (fn: > <> 0)
            '(-5 2 0 0 3 -1 0 4))
   ;; (2 3 4)"
   (declare (debug 'body))
   (let* ((argsym       (make-symbol "ARGS"))
-         (symbol-vars  '(<> it))
+         (symbol-vars  '(<>))
          (digit-vars   '(<1> <2> <3> <4> <5> <6> <7> <8> <9>))
          (symbols      (eval (backquote (-flatten ',body))))
          (digit-vars-used        (-intersection digit-vars symbols))
