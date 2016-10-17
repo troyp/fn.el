@@ -68,36 +68,37 @@ Examples:
   ;; 7"
   (declare (debug 'body))
   (let* ((argsym       (make-symbol "ARGS"))
-         (symbol-vars  '(<>))
-         (digit-vars   '(<1> <2> <3> <4> <5> <6> <7> <8> <9>))
-         (symbols      (eval (backquote (-flatten ',body))))
-         (digit-vars-used     (-intersection digit-vars symbols))
-         (symbol-vars-used    (-intersection symbol-vars symbols))
-         (highest-digit-used  (-last-item (sort digit-vars-used
-                                                #'string-lessp)))
-         (highest-digit-var-idx  (1+ (or (-elem-index highest-digit-used
-                                                      digit-vars)
+         (symbolic-placeholders  '(<>))
+         (numbered-placeholders  '(<1> <2> <3> <4> <5> <6> <7> <8> <9>))
+         (symbols                (eval (backquote (-flatten ',body))))
+         (numbered-vars-used     (-intersection numbered-placeholders symbols))
+         (symbolic-vars-used     (-intersection symbolic-placeholders symbols))
+         (highest-var-used       (-last-item (sort numbered-vars-used
+                                                   #'string-lessp)))
+         (highest-index-used     (1+ (or (-elem-index highest-var-used
+                                                      numbered-placeholders)
                                          -1)))
          bindings)
-    (cl-assert (not (and symbol-vars-used digit-vars-used))
+    (cl-assert (not (and symbolic-vars-used numbered-vars-used))
                nil
                "Numbered placeholders <n> should not be combined with <>.")
     (when (member '<rest> symbols)
       (!cons (list '<rest>
-                   (case highest-digit-var-idx
+                   (case highest-index-used
+                     ;; optimize expansion for low n
                      (0 argsym)
                      (1 `(cdr ,argsym))
                      (2 `(cddr ,argsym))
-                     (t `(seq-drop ,argsym ,highest-digit-var-idx))))
+                     (t `(seq-drop ,argsym ,highest-index-used))))
              bindings))
     (--map (!cons (list  it
                          `(nth 0 ,argsym))
                   bindings)
-           symbol-vars-used)
+           symbolic-vars-used)
     (--map (!cons (list  it
-                         `(nth ,(-elem-index it digit-vars) ,argsym))
+                         `(nth ,(-elem-index it numbered-placeholders) ,argsym))
                   bindings)
-           digit-vars-used)
+           numbered-vars-used)
     `(lambda (&rest ,argsym)
        (let (,@bindings)
          ,@body))))
@@ -126,36 +127,37 @@ Examples:
   ;; (2 3 4)"
   (declare (debug 'body))
   (let* ((argsym       (make-symbol "ARGS"))
-         (symbol-vars  '(<>))
-         (digit-vars   '(<1> <2> <3> <4> <5> <6> <7> <8> <9>))
-         (symbols      (eval (backquote (-flatten ',body))))
-         (digit-vars-used        (-intersection digit-vars symbols))
-         (symbol-vars-used       (-intersection symbol-vars symbols))
-         (highest-digit-used     (-last-item (sort digit-vars-used
+         (symbolic-placeholders  '(<>))
+         (numbered-placeholders  '(<1> <2> <3> <4> <5> <6> <7> <8> <9>))
+         (symbols                (eval (backquote (-flatten ',body))))
+         (numbered-vars-used     (-intersection numbered-placeholders symbols))
+         (symbolic-vars-used     (-intersection symbolic-placeholders symbols))
+         (highest-var-used       (-last-item (sort numbered-vars-used
                                                    #'string-lessp)))
-         (highest-digit-var-idx  (1+ (or (-elem-index highest-digit-used
-                                                      digit-vars)
+         (highest-index-used     (1+ (or (-elem-index highest-var-used
+                                                      numbered-placeholders)
                                          -1)))
          bindings)
-    (cl-assert (not (and symbol-vars-used digit-vars-used))
+    (cl-assert (not (and symbolic-vars-used numbered-vars-used))
                nil
                "Numbered placeholders <n> should not be combined with <>.")
     (when (member '<rest> symbols)
       (!cons (list '<rest>
-                   (case highest-digit-var-idx
+                   (case highest-index-used
+                     ;; optimize expansion for low n
                      (0 argsym)
                      (1 `(cdr ,argsym))
                      (2 `(cddr ,argsym))
-                     (t `(seq-drop ,argsym ,highest-digit-var-idx))))
+                     (t `(seq-drop ,argsym ,highest-index-used))))
              bindings))
     (--map (!cons (list  it
                          `(nth 0 ,argsym))
                   bindings)
-           symbol-vars-used)
+           symbolic-vars-used)
     (--map (!cons (list  it
-                         `(nth ,(-elem-index it digit-vars) ,argsym))
+                         `(nth ,(-elem-index it numbered-placeholders) ,argsym))
                   bindings)
-           digit-vars-used)
+           numbered-vars-used)
     `(lambda (&rest ,argsym)
        (let (,@bindings)
          (,@body)))))
