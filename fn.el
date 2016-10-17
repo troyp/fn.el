@@ -67,7 +67,7 @@ Examples:
   (funcall (fn 7))
   ;; 7"
   (declare (debug 'body))
-  (let* ((argsym       (make-symbol "ARGS"))
+  (let* ((argsym                 (make-symbol "ARGS"))
          (symbolic-placeholders  '(<>))
          (numbered-placeholders  '(<1> <2> <3> <4> <5> <6> <7> <8> <9>))
          (symbols                (eval (backquote (-flatten ',body))))
@@ -126,7 +126,7 @@ Examples:
            '(-5 2 0 0 3 -1 0 4))
   ;; (2 3 4)"
   (declare (debug 'body))
-  (let* ((argsym       (make-symbol "ARGS"))
+  (let* ((argsym                 (make-symbol "ARGS"))
          (symbolic-placeholders  '(<>))
          (numbered-placeholders  '(<1> <2> <3> <4> <5> <6> <7> <8> <9>))
          (symbols                (eval (backquote (-flatten ',body))))
