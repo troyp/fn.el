@@ -32,6 +32,7 @@
 
 
 
+;;;###autoload
 (defmacro fn (&rest body)
   "Return a function defined by BODY.
 
@@ -105,6 +106,7 @@ Examples:
 
 
 
+;;;###autoload
 (defmacro fn: (&rest body)
   "Return a function defined by (BODY).
 
