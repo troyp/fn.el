@@ -50,7 +50,7 @@ If applied to a literal, creates a constant function, or equivalently, a thunk
 
 Examples:
 
-  (-map (fn (* <> <>)) (number-sequence 0 10))
+  (-map (fn (* <1> <1>)) (number-sequence 0 10))
   ;; (0 1 4 9 16 25 36 49 64 81 100)
 
   (-map (fn (/ (-sum <>)
@@ -121,7 +121,7 @@ the highest numerical parameter supplied.
 
 Examples:
 
-  (-map (fn: * <> <>) (number-sequence 0 10))
+  (-map (fn: * <1> <1>) (number-sequence 0 10))
   ;; (0 1 4 9 16 25 36 49 64 81 100)
 
   (-filter (fn: > <> 0)
