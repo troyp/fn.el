@@ -11,7 +11,7 @@
      (should= (a b)
               (should (= a b))))
 
-  (ert-deftest test-fn ()
+  (ert-deftest test-fn-docstring-examples ()
     "Test `fn'."
 
     (should-equal (-map (fn (* <1> <1>))
@@ -32,15 +32,68 @@
                   ;; result:
                   '(3 6 9))
 
+    )
+
+  (ert-deftest test-fn-unit-tests ()
+    "Test `fn'."
+
+    ;; thunk/constant function
     (should=
      (funcall (fn 7))
      ;; result:
      7)
-
     (should=
      (funcall (fn 7) 2)
      ;; result:
      7)
+
+    ;; single argument
+    (should=
+     (funcall (fn (+ <> 7)) 2)
+     ;; result:
+     9)
+    ;; ... with superfluous arguments
+    (should=
+     (funcall (fn (+ <> 7)) 2 3 4)
+     ;; result:
+     9)
+    ;; ... in last place
+    (should=
+     (funcall (fn (- 9 <>)) 3)
+     ;; result:
+     6)
+    ;; ... with numbered placeholder
+    (should=
+     (funcall (fn (+ <1> 7)) 2)
+     ;; result:
+     9)
+    ;; single function argument
+    (should=
+     (funcall (fn (funcall <> 16))
+              #'sqrt)
+     ;; result:
+     4.0)
+
+    ;; two arguments
+    (should=
+     (funcall (fn (- <1> <2>)) 11 5)
+     ;; result:
+     6)
+    ;; ... applied in reverse order
+    (should=
+     (funcall (fn (- <2> <1>)) 11 5)
+     ;; result:
+     -6)
+    ;; ... with superfluous arguments
+    (should=
+     (funcall (fn (- <1> <2>)) 11 5 8 1)
+     ;; result:
+     6)
+
+    )
+
+  (ert-deftest test-fn-variable-capture ()
+    "Test `fn'."
 
     ;; variable capture
     (should=
