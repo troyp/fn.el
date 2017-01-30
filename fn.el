@@ -113,11 +113,12 @@ Examples:
 Intended for inline use where concision is desired.  If creating a function to
 bind as a function value, use `lambda' or `-lambda'.
 
-The definition BODY may use the anaphoric parameter <> for the sole argument,
-order <1> ... <9> to refer to multiple positional arguments. The parameter
-<rest> refers to a list containing the (n+1)st and later arguments,where <n> is
-the highest numerical parameter supplied.
+Identical to `fn' except that BODY is automatically parenthesized.
 
+The definition BODY may use the anaphoric parameter <> for the sole argument,
+or <1> ... <9> to refer to multiple positional arguments. The parameter
+<rest> refers to a list containing the (n+1)st and later arguments, where <n> is
+the highest numerical parameter supplied.
 
 Examples:
 
