@@ -4,7 +4,7 @@
 
 ;; Author: Troy Pracy
 ;; Keywords: functional
-;; Version: 0.1.1
+;; Version: 0.1.2
 ;; Package-Requires: ((emacs "24") (cl-lib "0.5") (dash "2.12.1") (dash-functional "1.2.0"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -80,9 +80,8 @@ Examples:
                                                       numbered-placeholders)
                                          -1)))
          bindings)
-    (cl-assert (not (and symbolic-vars-used numbered-vars-used))
-               nil
-               "Numbered placeholders <n> should not be combined with <>.")
+    (when (and symbolic-vars-used numbered-vars-used)
+      (error "Numbered placeholders <n> should not be combined with <>."))
     (when (member '<rest> symbols)
       (!cons (list '<rest>
                    (case highest-index-used
@@ -141,9 +140,8 @@ Examples:
                                                       numbered-placeholders)
                                          -1)))
          bindings)
-    (cl-assert (not (and symbolic-vars-used numbered-vars-used))
-               nil
-               "Numbered placeholders <n> should not be combined with <>.")
+    (when (and symbolic-vars-used numbered-vars-used)
+      (error "Numbered placeholders <n> should not be combined with <>."))
     (when (member '<rest> symbols)
       (!cons (list '<rest>
                    (case highest-index-used
