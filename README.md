@@ -1,14 +1,14 @@
-fn.el -- Functional utilities for Emacs Lisp.
+fn.el -- Concise anonymous functions for Emacs Lisp.
 -----
 
-__fn.el__ provides essential an anonymous function facility focused on
-concision and readability
+__fn.el__ provides macros for writing concise and readable anonymous functions.
 
 ------------------------------------------------------------
 
 ## Installation
 
-Place `fn.el` in any directory on your `load-path` and:
+* Install from [melpa](http://melpa.org/#/) using `M-x list-packages`.
+* Or, place `fn.el` in any directory on your `load-path` and execute:
 
     (require 'fn)
 
