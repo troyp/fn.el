@@ -4,12 +4,9 @@
 (require 'ert)
 
 (cl-flet
-    ((should-equal (a b)
-                   (should (equal a b)))
-     (should-eql (a b)
-                 (should (eql a b)))
-     (should= (a b)
-              (should (= a b))))
+    ((should-equal (a b) (should (equal a b)))
+     (should-eql (a b) (should (eql a b)))
+     (should= (a b) (should (= a b))))
 
   (ert-deftest test-fn-docstring-examples ()
     "Test `fn' and `fn:' docstring examples."
@@ -19,7 +16,6 @@
                         '(0 1 2 3 4 5 6 7 8 9 10))
                   ;; result:
                   '(0 1 4 9 16 25 36 49 64 81 100))
-
     (should-equal (-map (fn (/ (-sum <>)
                                (length <>)))
                         '((3.0 4.0 5.0 5.0 10.0)
@@ -27,11 +23,11 @@
                           (1 5)))
                   ;; result:
                   '(5.4 2.0 3))
-
     (should-equal (-filter (fn (zerop (mod <> 3)))
                            '(1 2 3 4 5 6 7 8 9 10))
                   ;; result:
                   '(3 6 9))
+
     ;; fn: docstring
     (should-equal (-map (fn: * <> <>) (number-sequence 0 10))
                   '(0 1 4 9 16 25 36 49 64 81 100))
@@ -74,7 +70,7 @@
      (funcall (fn (+ <1> 7)) 2)
      ;; result:
      9)
-    ;; single function argument
+    ;; ... single function argument
     (should=
      (funcall (fn (funcall <> 16))
               #'sqrt)
@@ -128,7 +124,7 @@
      (funcall (fn: + <1> 7) 2)
      ;; result:
      9)
-    ;; single function argument
+    ;; ... single function argument
     (should=
      (funcall (fn: funcall <> 16)
               #'sqrt)
