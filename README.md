@@ -24,7 +24,7 @@ __fn.el__ provides macros for writing concise and readable anonymous functions.
 Return a function defined by BODY.
 
 Intended for inline use where concision is desired.  If creating a function to
-bind as a function value, use `lambda' or `-lambda'.
+bind as a function value, use `lambda` or `-lambda`.
 
 Return a function defined by BODY.
 
@@ -58,7 +58,7 @@ If applied to a literal, creates a constant function, or equivalently, a thunk
 Return a function defined by (BODY).
 
 Intended for inline use where concision is desired.  If creating a function to
-bind as a function value, use `lambda' or `-lambda'.
+bind as a function value, use `lambda` or `-lambda`.
 
 Return a function defined by BODY.
 
