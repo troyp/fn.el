@@ -164,6 +164,39 @@
 
     )
 
+  (ert-deftest test-fn-nested-fn ()
+    "Test nested occurrences of `fn' and `fn:'."
+
+    ;; nested fn
+    (should-equal
+     (funcall (fn (-map (fn (+ 10 <>))
+                        <>))
+              '(1 2 3 4 5))
+     :result '(11 12 13 14 15))
+
+    ;; nested fn:
+    (should-equal
+     (funcall (fn: -map (fn: + 10 <>) <>)
+              '(1 2 3 4 5))
+     :result '(11 12 13 14 15))
+
+    ;; nested fn and fn:
+    (should-equal
+     (funcall (fn (-map (fn: + 10 <>)
+                        <>))
+              '(1 2 3 4 5))
+     :result '(11 12 13 14 15))
+
+    ;; 3-level nesting: sum of squares
+    (should-equal
+     (funcall (fn: -map (fn: -sum (-map (fn: * <> <>) <>))
+                   (-map (fn: number-sequence 1 <>)
+                         (number-sequence 1 <>)))
+              5)
+     :result '(1 5 14 30 55))
+
+    )
+
   (ert-deftest test-fn-variable-capture ()
     "Test `fn'."
 
