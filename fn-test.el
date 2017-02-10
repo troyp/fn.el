@@ -84,6 +84,39 @@
      (funcall (fn (- <1> <2>)) 11 5 8 1)
      :result 6)
 
+    ;; rest parameter
+    ;; ... n=0
+    (should-equal
+     (funcall (fn <rest>))
+     :result '())
+    (should-equal
+     (funcall (fn <rest>) 1 3 5 7)
+     :result '(1 3 5 7))
+    ;; ... n=1
+    (should-equal
+     (funcall (fn <1> <rest>) 1)
+     :result '())
+    (should-equal
+     (funcall (fn <1> <rest>) 1 3 5 7)
+     :result '(3 5 7))
+    ;; ... n=2
+    (should-equal
+     (funcall (fn <2> <rest>) 1 3 5 7)
+     :result '(5 7))
+    (should-equal
+     (funcall (fn <2> <rest>) 1 3)
+     :result '())
+    ;; ... n=3
+    (should-equal
+     (funcall (fn <3> <rest>) 1 3 5)
+     :result '())
+    (should-equal
+     (funcall (fn <3> <rest>) 1 3 5 7)
+     :result '(7))
+    (should-equal
+     (funcall (fn <1> <2> <3> <rest>) 1 3 5 7)
+     :result '(7))
+
     )
 
   (ert-deftest test-fn-unit-tests/fn: ()
