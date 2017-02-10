@@ -52,6 +52,9 @@ If applied to a literal, creates a constant function, or equivalently, a thunk
 
     (funcall (fn 7))
     ;; 7
+
+    (funcall (fn (-map #'list <rest>)) 1 2 3 4)
+    ;; ((1) (2) (3) (4))
     
 ### fn: `(&rest BODY)`
 

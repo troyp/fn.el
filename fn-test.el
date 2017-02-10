@@ -25,6 +25,9 @@
     (should-equal (-filter (fn (zerop (mod <> 3)))
                            '(1 2 3 4 5 6 7 8 9 10))
                   :result '(3 6 9))
+    (should-equal (funcall (fn (-map #'list <rest>)) 1 2 3 4)
+                  :result
+                  '((1) (2) (3) (4)))
 
     ;; fn: docstring
     (should-equal (-map (fn: * <> <>) (number-sequence 0 10))

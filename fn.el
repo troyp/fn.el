@@ -66,7 +66,10 @@ Examples:
   ;; (3 6 9)
 
   (funcall (fn 7))
-  ;; 7"
+  ;; 7
+
+  (funcall (fn (-map #'list <rest>)) 1 2 3 4)
+  ;; ((1) (2) (3) (4))"
   (declare (debug 'body))
   (let* ((argsym                 (make-symbol "ARGS"))
          (symbolic-placeholders  '(<>))
