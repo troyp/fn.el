@@ -3,6 +3,9 @@ fn.el -- Concise anonymous functions for Emacs Lisp.
 
 __fn.el__ provides macros for writing concise and readable anonymous functions.
 
+[![MELPA](https://melpa.org/packages/fn-badge.svg)](https://melpa.org/#/fn)
+[![MELPA Stable](https://stable.melpa.org/packages/fn-badge.svg)](https://stable.melpa.org/#/fn)
+
 ------------------------------------------------------------
 
 ## Installation
