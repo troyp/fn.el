@@ -3,11 +3,8 @@
 (require 'fn)
 (require 'ert)
 
-(cl-macrolet ((should-equal
-               (expr keyword result)
-               (progn
-                 (unless (eq keyword :result) (error "expected :result"))
-                 `(should (equal ,expr ,result)))))
+(cl-macrolet
+    ((should-equal (expr &key result) `(should (equal ,expr ,result))))
 
   (ert-deftest test-fn-docstring-examples ()
     "Test `fn' and `fn:' docstring examples."
